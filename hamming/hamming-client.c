@@ -35,7 +35,7 @@ int main(void) {
     redundant_bits++;
   }
   printf("Total number of redundant bits are: %d\n", redundant_bits);
-  char codeword[64];
+  char codeword[64] = {'0'};
   int total_len = data_len + redundant_bits;
   for (int i = 0; i < redundant_bits; i++) {
     codeword[total_len + 1 - (int)pow(2, i)] = 'P';
