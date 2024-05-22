@@ -40,19 +40,6 @@ int main(void) {
 
   printf("Databit padded with zeros: %s\n", str);
   printf("Remainder is: %s\n", remainder);
-  //int rem_len = strlen(remainder); //6
-  //char trimmedRemainder[10];
-  //int curridx = (polylen - 1) - 1;
-  //for (int i = rem_len - 1; i >= rem_len - (polylen - 1); i--) {
-  //  trimmedRemainder[curridx--] = remainder[i];
-  //}
-  //trimmedRemainder[polylen-1] = '\0'; // make sure to terminate the string
-  //printf("CRC bits are: %s\n", trimmedRemainder);
-  // update the final databit
-  //curridx = 0;
-  //for (int i = len; i < len + polylen - 1; i++) {
-  //  str[i] = trimmedRemainder[curridx++];
-  //}
   int curridx = 0;
   int startidx = strlen(remainder) - polylen + 1;
   printf("CRC bits are: ");
