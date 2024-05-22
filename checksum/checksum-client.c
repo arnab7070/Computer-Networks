@@ -44,7 +44,7 @@ int main(void) {
   char segmentedstr[10][10];
   int totalSegments = strlen(str) / seglen;
   for (int i = 0; i < totalSegments; i++) {
-    int temp = 8 * i; // temp value for next round
+    int temp = seglen * i; // temp value for next round
     for (int j = 0; j < seglen; j++) {
       segmentedstr[i][j] = str[temp + j];
     }
