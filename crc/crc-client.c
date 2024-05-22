@@ -31,12 +31,9 @@ int main(void) {
   for (int i = 0; i < strlen(str); i++) {
     // Append the current bit to the current remainder
     remainder[polylen - 1] = str[i];
-
-    // If the length of the current remainder is greater than or equal to the
-    // length of the divisor
+    // If the length of the current remainder is greater than or equal to the length of the divisor
     if (strlen(remainder) >= strlen(genpoly)) {
-      // Perform a bitwise XOR operation between the current remainder and the
-      // divisor
+      // Perform a bitwise XOR operation between the current remainder and the divisor
       xorOperation(remainder, genpoly);
     }
   }
