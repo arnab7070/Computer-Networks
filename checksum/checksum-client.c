@@ -2,9 +2,9 @@
 #include <string.h>
 #include <arpa/inet.h>
 #include <unistd.h>
-void binary_addition(char *result, char *bin1, char *bin2) {
+void binary_addition(char *result, char *bin1, char *bin2, int seglen) {
   int carry = 0;
-  for (int i = 7; i >= 0; i--) {
+  for (int i = seglen-1; i >= 0; i--) {
     int bit1 = bin1[i] - '0';
     int bit2 = bin2[i] - '0';
     int sum = bit1 + bit2 + carry;
@@ -14,7 +14,7 @@ void binary_addition(char *result, char *bin1, char *bin2) {
 
   // Handle overflow
   if (carry) {
-    for (int i = 7; i >= 0; i--) {
+    for (int i = seglen-1; i >= 0; i--) {
       int bit = result[i] - '0';
       int sum = bit + carry;
       result[i] = (sum % 2) + '0';
@@ -22,8 +22,8 @@ void binary_addition(char *result, char *bin1, char *bin2) {
     }
   }
 }
-void ones_complement(char *bin) {
-  for (int i = 0; i < 8; i++) {
+void ones_complement(char *bin, int seglen) {
+  for (int i = 0; i < seglen; i++) {
     bin[i] = (bin[i] == '0') ? '1' : '0';
   }
 }
@@ -52,12 +52,13 @@ int main(void) {
   char sum[9] = "00000000";
   char temp[9];
 
-  for (int i = 0; i < 4; i++) {
+  for (int i = 0; i < totalSegments; i++) {
     strcpy(temp, sum);
-    binary_addition(sum, temp, segmentedstr[i]);
+    binary_addition(sum, temp, segmentedstr[i], seglen);
   }
-  ones_complement(sum);
-  strcpy(segmentedstr[4], sum);
+  ones_complement(sum, seglen);
+  printf("Checksum: %s\n",sum);
+  strcpy(segmentedstr[totalSegments], sum);
   send(sd,segmentedstr,sizeof(segmentedstr),0);
   close(sd);
 }

@@ -38,10 +38,12 @@ int main() {
   recv(cd, segmentedstr, sizeof(segmentedstr), 0);
   char sum[9] = "00000000";
   char temp1[9];
+  // change the limit of for loop according to the totalSegments + 1 length
   for (int i = 0; i < 5; i++) {
     strcpy(temp1, sum);
     binary_addition(sum, temp1, segmentedstr[i]);
   }
+  printf("Sum: %s\n",sum);
   for(int i = 0; i < strlen(sum); i++) {
       if(sum[i] != '1'){
       	printf("There is some error in data received\n");
